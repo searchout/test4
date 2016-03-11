@@ -1,27 +1,12 @@
-<?
-// This is a template for a PHP scraper on morph.io (https://morph.io)
-// including some code snippets below that you should find helpful
+<?php
+require 'scraperwiki/simple_html_dom.php';php');
 
-// require 'scraperwiki.php';
-// require 'scraperwiki/simple_html_dom.php';
-//
-// // Read in a page
-// $html = scraperwiki::scrape("http://foo.com");
-//
-// // Find something on the page using css selectors
-// $dom = new simple_html_dom();
-// $dom->load($html);
-// print_r($dom->find("table.list"));
-//
-// // Write out to the sqlite database using scraperwiki library
-// scraperwiki::save_sqlite(array('name'), array('name' => 'susan', 'occupation' => 'software developer'));
-//
-// // An arbitrary query against the database
-// scraperwiki::select("* from data where 'name'='peter'")
+// スクレイピングしたいURLを指定
+$html = file_get_html( 'http://hotel.travel.rakuten.co.jp/hotelinfo/plan/5255?f_sort=hotel&f_dai=japan&f_teikei=quick&f_page=1&f_hyoji=100&f_image=1&f_flg=PLAN' );
 
-// You don't have to do things with the ScraperWiki library.
-// You can use whatever libraries you want: https://morph.io/documentation/php
-// All that matters is that your final data is written to an SQLite database
-// called "data.sqlite" in the current working directory which has at least a table
-// called "data".
+// 引っ張るものを指定してa.entry-link要素を$elementに代入
+foreach($html->find('a[class="htlPlnRmTypPrc roomPrice"]') as $element)
+
+// $element(a要素)のhrefの後ろにbrタグを入れて吐き出す
+echo $element->href . '<br>';
 ?>
